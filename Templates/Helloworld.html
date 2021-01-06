@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CovidTracker</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<script src="jquery-3.5.1.min.js">$('.count').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+});
+</script>
+	<style type="text/css">
+		.container{
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		#topright{
+	width: 200px;
+	height: 100px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  float:left;
+
+		}
+		#topleft{
+  width: 200px;
+	height: 100px;
+	background: red;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  float:left;
+  margin:5px;
+}
+.count
+{
+  line-height: 100px;
+  color:white;
+  margin-left:30px;
+  font-size:25px;
+}
+			</style>
+</head>
+<body style=";background-image:url('https://i.pinimg.com/originals/92/ad/49/92ad49b7e90f96a0686bf6a9f28c2c3f.gif');
+background-position: center;
+background-size: cover;">
+<div class="d-flex justify-content-between">
+	<div id="topleft"><span class="count">Visitors:{{Count}}</span></div>
+	<div id="topRight"><img style="width:200px ;height:100px " src="https://assets.weforum.org/editor/pCV9NfEV8xsSrcDBKFK9sG9f288g-Kmg1rAd768LteU.gif" alt="Civid-Map-gif"></div>
+</div>
+<h1 style="color: black;text-align: center;"><span style="color: red">COVID-19 </span>WORLDWIDE DATA</h1>
+<form style="margin-top: 50px" method="POST" class="d-flex justify-content-center align-items-center" action="">
+   	{% csrf_token %}
+   <select class="form-control" style="width:200px" name="selected">
+   {% for country in mylist %}
+     <option><h5>{{country}}</h5></option>
+  {% endfor %}
+  </select>
+  <input type="submit" value="select country" class="btn btn-danger" name="selectCountry">
+</form>
+
+<h2 style="margin-top: 150px;color: black;text-align: center">{{slectedCountry}}</h2>
+<div class="d-flex justify-content-center align-items-center">
+	<div class="container" style="border-radius:10px;background-color: orange; height: 100px;width: 200px">
+		<h1 style="text-align: center">{{total}}</h1>
+		<p style="text-align: center"><b>Total Cases</b></p>
+	</div>
+	<div class="container" style="border-radius:10px;background-color: green; height: 100px;width: 200px">
+		<h1 style="text-align: center">{{recovered}}</h1>
+		<p style="text-align: center"><b>Recovered Cases</b></p>
+	</div>
+	<div class="container" style="border-radius:10px;background-color:yellow; height: 100px;width: 200px">
+		<h1 style="text-align: center">{{active}}</h1>
+		<p style="text-align: center"><b>Active Cases</b></p>
+	</div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+	<div class="container" style="border-radius:10px;background-color: skyblue; height: 100px;width: 200px">
+		<h1 style="text-align: center">{{new}}</h1>
+		<p style="text-align: center"><b>New Cases</b></p>
+	</div>
+	<div class="container" style="border-radius:10px;background-color:red;  height: 100px;width: 200px">
+		<h1 style="text-align: center">{{critical}}</h1>
+		<p style="text-align: center"><b>Critical Cases</b></p>
+	</div>
+	<div class="container" style="border-radius:10px;background-color: grey; height: 100px;width: 200px">
+		<h1 style="text-align: center">{{deaths}}</h1>
+		<p style="text-align: center"><b>Deaths Cases</b></p>
+	</div>
+</div>
+
+<footer style="margin-top:150px;color: grey;text-align:center; ">&copy; Copyright 2021 Developed By <span style="color:black">Prabhat Jha</span></footer>
+
+</body>
+</html>
